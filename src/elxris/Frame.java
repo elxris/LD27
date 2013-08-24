@@ -34,7 +34,7 @@ public class Frame extends JFrame implements MouseListener, KeyListener, MouseMo
         mouse = new Pointer();
         Canvas canvas = new Canvas(game, mouse);
         add(canvas);
-        tick = new Tick(60, canvas);
+        tick = new Tick(120, canvas);
         tick.start();
     }
     public void run(){
