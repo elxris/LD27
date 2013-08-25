@@ -3,6 +3,8 @@ package elxris.art;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.util.Random;
+
 import elxris.util.ColorHandler;
 
 public class Arc implements Art{
@@ -11,6 +13,7 @@ public class Arc implements Art{
     private static int deadAngle = 1;
     private ColorHandler color;
     private int x, y, offX, offY;
+    private int selected; 
     private float angle;
     public Arc(ColorHandler color, int secments, int x, int y, int offsetX, int offsetY, float angle){
         this.color = color;
@@ -31,23 +34,27 @@ public class Arc implements Art{
         g.setColor(Color.BLACK);
         //g.fillOval(getX(), getY(), size, size);
         for(int i = 0; i < secments; i++){
-            g.setColor(color.getColor());
+            if(i == getSelected()){
+                g.setColor(new ColorHandler(Color.GREEN, color.));
+            }else{
+                g.setColor(color.getColor());
+            }
             g.fillPolygon(getPoly(i));
         }
     }
     public Polygon getPoly(int num){
         Polygon poly = new Polygon();
-        double offAngle = (360-(secments*deadAngle))/secments;
+        double offAngle = (360-((double)secments*(double)deadAngle))/(double)secments;
         double deg = angle+num*offAngle+num*deadAngle;
         double cos = Math.cos(Math.toRadians(deg));
         double sin = Math.sin(Math.toRadians(deg));
-        double thick = 1.1d;
+        double thick = 15d;
         poly.addPoint(getX()+(int)(size*cos), getY()+(int)(size*sin));
-        poly.addPoint(getX()+(int)((size*thick)*cos), getY()+(int)((size*thick)*sin));
+        poly.addPoint(getX()+(int)((size+thick)*cos), getY()+(int)((size+thick)*sin));
         deg += offAngle;
         cos = Math.cos(Math.toRadians(deg));
         sin = Math.sin(Math.toRadians(deg));
-        poly.addPoint(getX()+(int)((size*thick)*cos), getY()+(int)((size*thick)*sin));
+        poly.addPoint(getX()+(int)((size+thick)*cos), getY()+(int)((size+thick)*sin));
         poly.addPoint(getX()+(int)(size*cos), getY()+(int)(size*sin));
         return poly;
     }
@@ -85,6 +92,30 @@ public class Arc implements Art{
     public void setOffsetPos(int x, int y){
         this.offX = x;
         this.offY = y;
+    }
+    public void setSecments(int value){
+        secments = value;
+    }
+    public int getSecments(){
+        return secments;
+    }
+    public void addSecments(int value){
+        setSecments(getSecments()+value);
+    }
+    public void setSelected(int value){
+        if(value > getSecments()){
+            value = getSecments();
+        }else if(value <= 0){
+            value = 1;
+        }
+        selected = value;
+    }
+    public int getSelected(){
+        return selected;
+    }
+    public void setRandomSelected(){
+        Random rndm = new Random();
+        setSelected(rndm.nextInt(getSecments()+1));
     }
     public ColorHandler getColor(){
         return color;
