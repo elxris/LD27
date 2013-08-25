@@ -21,6 +21,7 @@ public class Canvas extends JPanel{
         // TODO Auto-generated method stub
         super.paint(g);
         if(!game.pausa){
+            game.tick();
             game.draw(g);
         }
         mouse.draw(g);
