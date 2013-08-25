@@ -9,7 +9,7 @@ public class Tick extends Timer{
     private static final long serialVersionUID = -282652776786022160L;
     private static int c = 0;
     private static long date;
-    private static int frames = 1;
+    public static int frames = 1;
     public Tick(final int frames, final Canvas canvas) {
         super(1000/frames, new ActionListener() {
             @Override

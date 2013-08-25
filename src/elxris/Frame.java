@@ -15,10 +15,9 @@ public class Frame extends JFrame {
     private Game game;
     private Pointer mouse;
     private Tick tick;
-    private Controls ctr;
     public Frame(){
         super("LD27 @elxris");
-        ctr = new Controls();
+        Controls ctr = new Controls();
         addMouseListener(ctr);
         addKeyListener(ctr);
         addMouseMotionListener(ctr);
@@ -28,7 +27,7 @@ public class Frame extends JFrame {
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
         setCursor(blankCursor);
         
-        game = new Game(ctr);
+        game = new Game();
         mouse = new Pointer();
         Canvas canvas = new Canvas(game, mouse);
         add(canvas);

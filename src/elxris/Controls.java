@@ -10,7 +10,7 @@ import elxris.art.Pointer;
 
 public class Controls implements MouseListener, KeyListener, MouseMotionListener{
     public static boolean up, down, right, left, space, rClick, lClick, mClick;
-    public static long timeLClick;
+    public static long timeLClick, timeWin;
     @Override
     public void mouseDragged(MouseEvent arg0) {
         // TODO Auto-generated method stub

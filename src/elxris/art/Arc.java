@@ -13,9 +13,10 @@ public class Arc implements Art{
     private static int deadAngle = 1;
     private ColorHandler color;
     private int x, y, offX, offY;
-    private int selected; 
-    private float angle;
-    public Arc(ColorHandler color, int secments, int x, int y, int offsetX, int offsetY, float angle){
+    private static int halted;
+    private static boolean selected;
+    private double angle;
+    public Arc(ColorHandler color, int secments, int x, int y, int offsetX, int offsetY, double angle){
         this.color = color;
         this.secments = secments;
         this.x = x;
@@ -32,10 +33,13 @@ public class Arc implements Art{
     }
     public void draw(Graphics g) {
         g.setColor(Color.BLACK);
-        //g.fillOval(getX(), getY(), size, size);
         for(int i = 0; i < secments; i++){
-            if(i == getSelected()){
-                g.setColor(new ColorHandler(Color.GREEN, color.));
+            if(i == getHalted()){
+                if(selected){
+                    g.setColor(new ColorHandler(Color.BLUE, color.getDarkness()).getColor());
+                }else{
+                    g.setColor(new ColorHandler(Color.GREEN, color.getDarkness()).getColor());
+                }
             }else{
                 g.setColor(color.getColor());
             }
@@ -44,16 +48,28 @@ public class Arc implements Art{
     }
     public Polygon getPoly(int num){
         Polygon poly = new Polygon();
+        Polygon polyBound = new Polygon();
         double offAngle = (360-((double)secments*(double)deadAngle))/(double)secments;
         double deg = angle+num*offAngle+num*deadAngle;
+        if(num == -1){
+            deg = angle+getHalted()*offAngle+getHalted()*deadAngle;
+        }
         double cos = Math.cos(Math.toRadians(deg));
         double sin = Math.sin(Math.toRadians(deg));
+        if(num == -1){
+            polyBound.addPoint(getX(), getY());
+            polyBound.addPoint(getX()+(int)(1000*cos), getY()+(int)(1000*sin));
+        }
         double thick = 15d;
         poly.addPoint(getX()+(int)(size*cos), getY()+(int)(size*sin));
         poly.addPoint(getX()+(int)((size+thick)*cos), getY()+(int)((size+thick)*sin));
         deg += offAngle;
         cos = Math.cos(Math.toRadians(deg));
         sin = Math.sin(Math.toRadians(deg));
+        if(num == -1){
+            polyBound.addPoint(getX()+(int)(1000*cos), getY()+(int)(1000*sin));
+            return polyBound;
+        }
         poly.addPoint(getX()+(int)((size+thick)*cos), getY()+(int)((size+thick)*sin));
         poly.addPoint(getX()+(int)(size*cos), getY()+(int)(size*sin));
         return poly;
@@ -64,13 +80,13 @@ public class Arc implements Art{
     public int getY(){
         return (int)(y+offY/(1+(double)((double)size/30)));
     }
-    public void setAngle(float angle){
-        this.angle = angle;
+    public void setAngle(double angle){
+        this.angle = angle%360;
     }
-    public void addAngle(float angle){
+    public void addAngle(double angle){
         setAngle(this.angle+angle);
     }
-    public float getAngle(){
+    public double getAngle(){
         return angle;
     }
     public int getIntAngle(){
@@ -95,6 +111,7 @@ public class Arc implements Art{
     }
     public void setSecments(int value){
         secments = value;
+        selected = false;
     }
     public int getSecments(){
         return secments;
@@ -102,20 +119,26 @@ public class Arc implements Art{
     public void addSecments(int value){
         setSecments(getSecments()+value);
     }
-    public void setSelected(int value){
+    public void setHalted(int value){
         if(value > getSecments()){
             value = getSecments();
         }else if(value <= 0){
             value = 1;
         }
+        halted = value;
+    }
+    public int getHalted(){
+        return halted;
+    }
+    public void setSelected(boolean value){
         selected = value;
     }
-    public int getSelected(){
+    public boolean getSelected(){
         return selected;
     }
-    public void setRandomSelected(){
+    public void setRandomHalted(){
         Random rndm = new Random();
-        setSelected(rndm.nextInt(getSecments()+1));
+        setHalted(rndm.nextInt(getSecments()));
     }
     public ColorHandler getColor(){
         return color;
