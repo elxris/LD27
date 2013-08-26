@@ -58,7 +58,7 @@ public class Arc implements Art{
         double sin = Math.sin(Math.toRadians(deg));
         if(num == -1){
             polyBound.addPoint(getX(), getY());
-            polyBound.addPoint(getX()+(int)(1000*cos), getY()+(int)(1000*sin));
+            polyBound.addPoint(getX()+(int)(10000*cos), getY()+(int)(10000*sin));
         }
         double thick = 15d;
         poly.addPoint(getX()+(int)(size*cos), getY()+(int)(size*sin));
@@ -67,7 +67,7 @@ public class Arc implements Art{
         cos = Math.cos(Math.toRadians(deg));
         sin = Math.sin(Math.toRadians(deg));
         if(num == -1){
-            polyBound.addPoint(getX()+(int)(1000*cos), getY()+(int)(1000*sin));
+            polyBound.addPoint(getX()+(int)(10000*cos), getY()+(int)(10000*sin));
             return polyBound;
         }
         poly.addPoint(getX()+(int)((size+thick)*cos), getY()+(int)((size+thick)*sin));

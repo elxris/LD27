@@ -3,8 +3,8 @@ package elxris.art;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import elxris.Frame;
-import elxris.Game;
+import elxris.game.Frame;
+import elxris.game.Game;
 
 public class Pew implements Art{
     int time;

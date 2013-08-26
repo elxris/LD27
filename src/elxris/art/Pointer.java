@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-import elxris.Controls;
+import elxris.game.Controls;
 
 public class Pointer implements Art{
     public static int x, y;

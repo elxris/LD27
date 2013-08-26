@@ -1,4 +1,4 @@
-package elxris;
+package elxris.game;
 
 import java.awt.Color;
 import java.awt.Graphics;

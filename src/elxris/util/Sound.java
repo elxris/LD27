@@ -1,8 +1,9 @@
 package elxris.util;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,12 +15,16 @@ public class Sound {
     public Clip clip;
     public Sound(String fileName){
         try {
-            File file = new File(fileName);
-            if (file.exists()) {
-                AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+            InputStream is = this.getClass().getResourceAsStream(fileName);
+            if (is != null) {
+                /*AudioInputStream sound = AudioSystem.getAudioInputStream(is);
              // load the sound into memory (a Clip)
+                clip = AudioSystem.getClip();*/
+                
+                URL defaultSound = getClass().getResource(fileName);
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(defaultSound);
                 clip = AudioSystem.getClip();
-                clip.open(sound);
+                clip.open(audioInputStream);
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + fileName);

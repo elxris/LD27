@@ -1,4 +1,4 @@
-package elxris;
+package elxris.game;
 
 import javax.swing.JFrame;
 
@@ -9,7 +9,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setAlwaysOnTop(true);
-        frame.setLocation(1600-700, 900-450);
+        //frame.setLocation(1600-700, 900-450);
         frame.run();
     }
 }

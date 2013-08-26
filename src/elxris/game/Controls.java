@@ -1,4 +1,4 @@
-package elxris;
+package elxris.game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,4 +1,4 @@
-package elxris;
+package elxris.game;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -28,7 +28,7 @@ public class Game {
             Arc arc = new Arc(new ColorHandler(color.getColor(), 0), 3);
             arc.setSize(i*3);
             //arc.setOffsetPos(i*10, i*w);
-            arc.setPos(350, 450/2);
+            arc.setPos(Frame.WIDTH/2, Frame.HEIGHT/2);
             //arc.setAngle(i*8);
             arcs[i] = arc;
         }
@@ -66,14 +66,14 @@ public class Game {
                 //arcs[i].addAngle((float)arcs[i].getSize()/800f);
             }
             arcs[i].setOffsetPos((int)camX, (int)camY);
-            arcs[i].setPos(350+(int)camX/4, 450/2+(int)camY/4);
+            arcs[i].setPos(Frame.WIDTH/2+(int)camX/4, Frame.HEIGHT/2+(int)camY/4);
             arcs[i].draw(g);
         }
-        g.setFont(new Font("Impact", Font.PLAIN, 30));
+        g.setFont(new Font("Impact", Font.PLAIN, 120));
         g.drawString(String.format("%.2f", Tick.getTicksToSeconds(timeGame)),
-                Frame.WIDTH/2-30, 50);
+                Frame.WIDTH/2+120, 150);
         g.setFont(new Font("Verdana", Font.BOLD, 14));
-        g.drawString("@elxris LD27", 0, 15);
+        g.drawString("@elxris LD27 #TenSeconds", 0, 15);
         g.drawString("Difficuly:" + this.level, 0, 30);
         pool.draw(g);
         if(Controls.timeWin != 0){
@@ -86,7 +86,7 @@ public class Game {
             Random rndm = new Random();
             g.setFont(new Font("Impact", Font.BOLD, 100));
             g.setColor(new Color(rndm.nextInt(256), rndm.nextInt(256), rndm.nextInt(256)));
-            g.drawString("You WIN!!!", Frame.WIDTH/5, Frame.HEIGHT/2);
+            g.drawString("You WIN!!!", Frame.WIDTH/3, Frame.HEIGHT/2);
         }
     }
     public void tick(){

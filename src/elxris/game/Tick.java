@@ -1,4 +1,4 @@
-package elxris;
+package elxris.game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
